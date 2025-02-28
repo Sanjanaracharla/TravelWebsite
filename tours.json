@@ -1,0 +1,12 @@
+[
+  { "img": "images/journey4.png", "title": "Mountain", "tours": 356, "activities": 248 },
+  { "img": "images/journey2.png", "title": "Safari", "tours": 220, "activities": 180 },
+  { "img": "images/journey3.png", "title": "Desert", "tours": 145, "activities": 100 },
+  { "img": "images/journey2.png", "title": "Beach", "tours": 500, "activities": 320 },
+  { "img": "images/journey3.png", "title": "Forest", "tours": 410, "activities": 275 },
+  { "img": "images/journey2.png", "title": "Cityscape", "tours": 290, "activities": 190 },
+  { "img": "images/journey4.png", "title": "Historical", "tours": 370, "activities": 225 },
+  { "img": "images/journey3.png", "title": "Adventure", "tours": 480, "activities": 310 },
+  { "img": "images/journey4.png", "title": "Cruise", "tours": 200, "activities": 150 },
+  { "img": "images/journey4.png", "title": "Cultural", "tours": 330, "activities": 210 }
+]

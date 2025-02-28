@@ -1,0 +1,7 @@
+[
+    { "name": "Western Europe", "image": "images/trend.png", "tours": 356, "activities": 248, "promotions": 26, "daysLeft": 22 },
+    { "name": "New York", "image": "images/trend2.png", "tours": 356, "activities": 248, "promotions": 15, "daysLeft": 22 },
+    { "name": "Venice", "image": "images/trend5.png", "tours": 356, "activities": 248, "promotions": 3, "daysLeft": 22 },
+    { "name": "Amsterdam", "image": "images/trend3.png", "tours": 356, "activities": 248, "promotions": 38, "daysLeft": 12 },
+    { "name": "London", "image": "images/trend5.png", "tours": 356, "activities": 248, "promotions": 28, "daysLeft": 22 }
+]

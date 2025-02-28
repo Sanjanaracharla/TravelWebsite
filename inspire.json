@@ -1,0 +1,91 @@
+[
+    { 
+        "id": 1, 
+        "image": "images/journey3.png", 
+        "category": "Beach", 
+        "date": "12 Aug", 
+        "duration": "5 days", 
+        "comments": "25", 
+        "title": "Exploring the Maldives", 
+        "authorImage": "images/payment.png", 
+        "authorName": "John Doe" 
+    },
+    { 
+        "id": 2, 
+        "image": "images/journey2.png", 
+        "category": "Mountain", 
+        "date": "22 Sep", 
+        "duration": "7 days", 
+        "comments": "18", 
+        "title": "Hiking the Alps", 
+        "authorImage": "images/payment2.png", 
+        "authorName": "Jane Smith" 
+    },
+    { 
+        "id": 3, 
+        "image": "images/journey4.png", 
+        "category": "City", 
+        "date": "05 Oct", 
+        "duration": "3 days", 
+        "comments": "30", 
+        "title": "A Weekend in Paris", 
+        "authorImage": "images/payment3.png", 
+        "authorName": "Emily Johnson" 
+    },
+    { 
+        "id": 4, 
+        "image": "images/journey2.png", 
+        "category": "Desert", 
+        "date": "18 Nov", 
+        "duration": "6 days", 
+        "comments": "12", 
+        "title": "Safari Adventure in Dubai", 
+        "authorImage": "images/payment5.png", 
+        "authorName": "Michael Lee" 
+    },
+    { 
+        "id": 5, 
+        "image": "images/journey2.png", 
+        "category": "Cultural", 
+        "date": "10 Dec", 
+        "duration": "4 days", 
+        "comments": "20", 
+        "title": "Discovering Kyoto’s Temples", 
+        "authorImage": "images/payment2.png", 
+        "authorName": "Sophia Brown" 
+    },
+    { 
+        "id": 6, 
+        "image": "images/journey2.png", 
+        "category": "Wildlife", 
+        "date": "15 Jan", 
+        "duration": "8 days", 
+        "comments": "28", 
+        "title": "Exploring the Amazon Rainforest", 
+        "authorImage": "images/payment3.png", 
+        "authorName": "David Wilson" 
+    },
+    { 
+        "id": 7, 
+        "image": "images/journey2.png", 
+        "category": "Island", 
+        "date": "22 Feb", 
+        "duration": "5 days", 
+        "comments": "35", 
+        "title": "Bora Bora Paradise Escape", 
+        "authorImage": "images/payment4.png", 
+        "authorName": "Olivia Taylor" 
+    },
+    { 
+        "id": 8, 
+        "image": "images/journey4.png", 
+        "category": "Historical", 
+        "date": "30 Mar", 
+        "duration": "3 days", 
+        "comments": "22", 
+        "title": "Exploring Rome’s Ancient Ruins", 
+        "authorImage": "images/payment3.png", 
+        "authorName": "William Martinez" 
+    }
+]
+

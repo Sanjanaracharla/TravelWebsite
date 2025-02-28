@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Website</title>
+    <link rel="stylesheet" href="./src/output.css">
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        #chatbot-container {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 400px;
+            height: 500px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            z-index:5;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .close-button {
+            display: none;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 16px;
+            line-height: 16px;
+        }
+        
+        .chatbot-icon {
+            position: fixed;
+            bottom: 20px; 
+            right: 20px;   
+            width: 60px;   
+            height: 60px;
+            background: linear-gradient(176.95deg, #b074ff -30.27%, #6d94ff 97.47%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+            cursor: pointer;
+            z-index: 1000; 
+        }
+
+        .chatbot-icon img {
+            width: 35px;  
+            height: 35px;
+        }
+
+        .chatbot-icon:hover {
+            background: linear-gradient(176.95deg, #7b31dc -30.27%, #6d94ff 97.47%);
+        }
+    </style>
+</head>
+<body>
+    <div class="chatbot-icon" onclick="openChatbot()">
+        <img class="vj4Eq5n" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2034%2034%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M21.3822%204.25L22.6667%201.88889L23.9511%204.25C24.4233%205.1%2025.1222%205.79889%2025.9722%206.27111L28.3333%207.55555L25.9722%208.84C25.1222%209.31222%2024.4233%2010.0111%2023.9511%2010.8611L22.6667%2013.2222L21.3822%2010.8611C20.91%2010.0111%2020.2111%209.31222%2019.3611%208.84L17%207.55555L19.3611%206.27111C20.2111%205.79889%2020.91%205.1%2021.3822%204.25Z%22%20fill%3D%22white%22%3E%3C%2Fpath%3E%3Cpath%20d%3D%22M21.3822%2023.1389L22.6667%2020.7778L23.9511%2023.1389C24.4233%2023.9889%2025.1222%2024.6878%2025.9722%2025.16L28.3333%2026.4444L25.9722%2027.7289C25.1222%2028.2011%2024.4233%2028.9%2023.9511%2029.75L22.6667%2032.1111L21.3822%2029.75C20.91%2028.9%2020.2111%2028.2011%2019.3611%2027.7289L17%2026.4444L19.3611%2025.16C20.2111%2024.6878%2020.91%2023.9889%2021.3822%2023.1389Z%22%20fill%3D%22white%22%3E%3C%2Fpath%3E%3Cpath%20d%3D%22M13.2222%209.44444L11.5033%2012.58C10.88%2013.7133%209.93555%2014.6578%208.80221%2015.2811L5.66666%2017L8.80221%2018.7189C9.93555%2019.3422%2010.88%2020.2867%2011.5033%2021.42L13.2222%2024.5556L14.9411%2021.42C15.5644%2020.2867%2016.5089%2019.3422%2017.6422%2018.7189L20.7778%2017L17.6422%2015.2811C16.5089%2014.6578%2015.5644%2013.7133%2014.9411%2012.58L13.2222%209.44444Z%22%20fill%3D%22white%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E">
+    </div>
+
+    <div id="chatbot-container">
+        <button class="close-button" onclick="closeChatbot()">&times;</button>
+        <iframe id="chatbot-frame" src=""></iframe>
+    </div>
+    <header class="font-normal text-sm">
+        <!-- Banner Section -->
+        <div class="flex justify-evenly items-center py-2">
+          <div class="flex justify-around flex-col md:flex-row">
+            <div class="flex items-center justify-center md:pr-4 cursor-pointer hover:text-blue-500 text-center">
+              <img src="images/phone.svg" alt="whatsapp" class="h-4 w-4 mr-1" />
+              <a href="#">+1 222-555-33-99</a>
+            </div>
+            <div class="flex items-center justify-center md:pr-4 cursor-pointer hover:text-blue-500 text-center">
+              <img src="images/mail.svg" alt="email" class="h-4 w-4 mr-1" />
+              <a href="#">support@travila.com</a>
+            </div>
+          </div>
+          <div class="hidden md:flex">
+            <div class="flex md:pr-4">
+              <img src="images/lightening.svg" alt="" class="h-4 w-4" />
+              <a>Unlock the Magic of Travel with Travila - Your Gateway to Extraordinary Experiences</a>
+            </div>
+            <div class="flex justify-center items-center text-yellow-500 pr-4 cursor-pointer hover:text-amber-700">
+              <a href="#">Get This Now</a>
+              <img src="images/arrownext.svg" alt="" class="h-4 w-4" />
+            </div>
+          </div>
+          <div class="flex">
+            <!-- Language Dropdown -->
+            <div class="flex pr-4 relative group">
+              <img src="images/lang.svg" alt="" class="h-6 w-6" />
+              <button class="ml-2 cursor-pointer transition-transform transform hover:scale-105">
+                EN
+              </button>
+              <div class="absolute hidden group-hover:block bg-white shadow-md mt-4 py-2 transition-all duration-300 ease-in-out z-50">
+                <a href="#" class="block p-2 hover:bg-gray-200">EN</a>
+                <a href="#" class="block p-2 hover:bg-gray-200">FR</a>
+                <a href="#" class="block p-2 hover:bg-gray-200">ES</a>
+              </div>
+            </div>
+            <!-- Currency Dropdown -->
+            <div class="flex pr-4 relative group">
+              <button class="cursor-pointer transition-transform transform hover:scale-105">
+                USD
+              </button>
+              <div class="absolute hidden group-hover:block bg-white shadow-md mt-4 py-2 transition-all duration-300 ease-in-out z-50">
+                <a href="#" class="block p-2 hover:bg-gray-200">USD</a>
+                <a href="#" class="block p-2 hover:bg-gray-200">EUR</a>
+                <a href="#" class="block p-2 hover:bg-gray-200">GBP</a>
+              </div>
+            </div>
+            <!-- Theme Toggle -->
+            <div class="flex pr-4 cursor-pointer">
+              <img src="images/sun.svg" alt="" class="h-6 w-6" />
+            </div>
+          </div>
+        </div>
+        <hr />
+      
+        <!-- Main Navigation -->
+        <nav class="w-full flex justify-around items-center py-2 flex-wrap">
+          <img src="images/logo.svg" alt="" class="cursor-pointer" />
+      
+          <!-- Desktop Navigation -->
+          <div class="hidden md:block">
+            <ol class="flex justify-between items-center">
+              <li class="px-4 relative group">
+                <button class="inline-flex items-center cursor-pointer transition-transform transform hover:scale-105">
+                  Home
+                  <img src="images/arrow.svg" alt="arrow-down" class="w-4 h-4" />
+                </button>
+                <div class="absolute hidden group-hover:block bg-white shadow-md py-2 transition-all duration-300 ease-in-out text-xs z-50">
+                  <a href="#" class="block p-2 hover:bg-gray-200">Overview</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">About Us</a>
+                </div>
+              </li>
+              <li class="px-4 relative group">
+                <button class="inline-flex items-center cursor-pointer transition-transform transform hover:scale-105">
+                  Tours
+                  <img src="images/arrow.svg" alt="arrow-down" class="w-4 h-4" />
+                </button>
+                <div class="absolute hidden group-hover:block bg-white shadow-md py-2 transition-all duration-300 ease-in-out text-xs z-50">
+                  <a href="#" class="block p-2 hover:bg-gray-200">Adventure</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">Luxury</a>
+                </div>
+              </li>
+              <li class="px-4 relative group">
+                <button class="inline-flex items-center cursor-pointer transition-transform transform hover:scale-105">
+                  Destination
+                  <img src="images/arrow.svg" alt="arrow-down" class="w-4 h-4" />
+                </button>
+                <div class="absolute hidden group-hover:block bg-white shadow-md py-2 transition-all duration-300 ease-in-out text-xs z-50">
+                  <a href="#" class="block p-2 hover:bg-gray-200">Popular Places</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">Hidden Gems</a>
+                </div>
+              </li>
+              <li class="px-4 relative group">
+                <button class="inline-flex items-center cursor-pointer transition-transform transform hover:scale-105">
+                  Activities
+                  <img src="images/arrow.svg" alt="arrow-down" class="w-4 h-4" />
+                </button>
+                <div class="absolute hidden group-hover:block bg-white shadow-md py-2 transition-all duration-300 ease-in-out text-xs z-50">
+                  <a href="#" class="block p-2 hover:bg-gray-200">Outdoor</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">Cultural</a>
+                </div>
+              </li>
+              <li class="px-4 relative group">
+                <button class="inline-flex items-center cursor-pointer transition-transform transform hover:scale-105">
+                  Hotel
+                  <img src="images/arrow.svg" alt="arrow-down" class="w-4 h-4" />
+                </button>
+                <div class="absolute hidden group-hover:block bg-white shadow-md py-2 transition-all duration-300 ease-in-out text-xs z-50">
+                  <a href="#" class="block p-2 hover:bg-gray-200">Budget</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">Luxury</a>
+                </div>
+              </li>
+              <li class="px-4 relative group">
+                <button class="inline-flex items-center cursor-pointer transition-transform transform hover:scale-105">
+                  Rental
+                  <img src="images/arrow.svg" alt="arrow-down" class="w-4 h-4" />
+                </button>
+                <div class="absolute hidden group-hover:block bg-white shadow-md py-2 transition-all duration-300 ease-in-out text-xs z-50">
+                  <a href="#" class="block p-2 hover:bg-gray-200">Car Rentals</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">Bike Rentals</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">Luxury Vehicles</a>
+                </div>
+              </li>
+              <li class="px-4 relative group">
+                <button class="inline-flex items-center cursor-pointer transition-transform transform hover:scale-105">
+                  Tickets
+                  <img src="images/arrow.svg" alt="arrow-down" class="w-4 h-4" />
+                </button>
+                <div class="absolute hidden group-hover:block bg-white shadow-md py-2 transition-all duration-300 ease-in-out text-xs z-50">
+                  <a href="#" class="block p-2 hover:bg-gray-200">Flight Tickets</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">Train Tickets</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">Event Tickets</a>
+                </div>
+              </li>
+              <li class="px-4 relative group">
+                <button class="inline-flex items-center cursor-pointer transition-transform transform hover:scale-105">
+                  Pages
+                  <img src="images/arrow.svg" alt="arrow-down" class="w-4 h-4" />
+                </button>
+                <div class="absolute hidden group-hover:block bg-white shadow-md py-2 transition-all duration-300 ease-in-out text-xs z-50">
+                  <a href="#" class="block p-2 hover:bg-gray-200">About Us</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">Terms & Conditions</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">Privacy Policy</a>
+                </div>
+              </li>
+              <li class="px-4 relative group">
+                <button class="inline-flex items-center cursor-pointer transition-transform transform hover:scale-105">
+                  Blog
+                  <img src="images/arrow.svg" alt="arrow-down" class="w-4 h-4" />
+                </button>
+                <div class="absolute hidden group-hover:block bg-white shadow-md py-2 transition-all duration-300 ease-in-out text-xs z-50">
+                  <a href="#" class="block p-2 hover:bg-gray-200">Travel Tips</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">Destination Guides</a>
+                  <a href="#" class="block p-2 hover:bg-gray-200">Latest News</a>
+                </div>
+              </li>
+              <li class="px-4">
+                <a href="#contact" class="hover:text-blue-300">Contact</a>
+              </li>
+            </ol>
+          </div>
+      
+          <!-- Mobile Menu Button -->
+          <div class="flex">
+            <button class="bg-black text-white rounded-3xl h-10 w-40 mx-2 hidden md:block cursor-pointer">
+              Become Local Expert
+            </button>
+            <button id="menu-button" class="md:hidden">
+              <img src="images/menu.svg" alt="menu"/>
+            </button>
+          </div>
+        </nav>
+      
+        <hr />
+      
+        <!-- Mobile Navigation Menu -->
+        <nav id="nav-menu" class="w-full hidden flex-col items-center bg-white shadow-md absolute top-30 left-0 right-0 z-50">
+          <ol class="flex flex-col md:flex-row md:justify-between md:items-center w-full">
+            <li class="p-2"><a href="#" class="hover:text-yellow-500">Home</a></li>
+            <li class="p-2"><a href="#" class="hover:text-yellow-500">Tours</a></li>
+            <li class="p-2"><a href="#" class="hover:text-yellow-500">Destination</a></li>
+            <li class="p-2"><a href="#" class="hover:text-yellow-500">Activities</a></li>
+            <li class="p-2"><a href="#" class="hover:text-yellow-500">Hotel</a></li>
+            <li class="p-2"><a href="#" class="hover:text-yellow-500">Rental</a></li>
+            <li class="p-2"><a href="#" class="hover:text-yellow-500">Tickets</a></li>
+            <li class="p-2"><a href="#" class="hover:text-yellow-500">Pages</a></li>
+            <li class="p-2"><a href="#" class="hover:text-yellow-500">Blog</a></li>
+            <li class="p-2"><a href="#contact" class="hover:text-yellow-500">Contact</a></li>
+          </ol>
+        </nav>
+      </header>
+    
+      <section>
+        <div class="relative">
+          <!-- Background Image -->
+          <img src="images/Background.png" alt="Background" class="w-full h-[300px] md:h-auto object-cover" />
+      
+          <div class="absolute inset-0 bg-opacity-30 flex flex-col items-center justify-center text-white text-center px-4">
+            <!-- Explore Button -->
+            <button class="bg-yellow-400 text-black px-4 py-2 rounded-full flex items-center space-x-2 font-semibold text-sm md:text-base">
+              <img src="images/earth.svg" alt="Earth icon" class="w-5 h-5 md:w-6 md:h-6" />
+              <span>Explore the World</span>
+            </button>
+      
+            <!-- Heading -->
+            <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold mt-4">
+              Your Gateway to Extraordinary Adventures
+            </h1>
+      
+            <!-- Description -->
+            <p class="mt-2 text-sm md:text-lg max-w-lg">
+              Pack your bags and let Travila redefine your travel experience. Where every journey is a story waiting to be told.
+            </p>
+          </div>
+        </div>
+      
+        <!-- Search Form -->
+        <div class="border border-[#E4E6E8] relative -mt-20 mx-auto w-11/12 max-w-4xl bg-white p-4 md:p-6 rounded-lg shadow-lg">
+          <div class="flex flex-col md:flex-row justify-between pb-5">
+            <div class="flex flex-wrap gap-2 mb-4 md:mb-0">
+              <button class="bg-black rounded-full text-white font-normal text-sm px-3 py-2">Tours</button>
+              <button class="font-normal text-sm px-3 py-2">Hotels</button>
+              <button class="font-normal text-sm px-3 py-2">Tickets</button>
+              <button class="font-normal text-sm px-3 py-2">Rental</button>
+              <button class="font-normal text-sm px-3 py-2">Activities</button>
+            </div>
+            <div class="flex items-center">
+              <img src="images/user.svg" alt="User icon" class="w-5 h-5" />
+              <p class="font-normal text-sm px-3 py-2">Need some help?</p>
+            </div>
+          </div>
+      
+          <!-- Search Fields -->
+          <div class="flex flex-col md:flex-row items-center justify-between border border-[#E4E6E8] rounded-lg p-4 gap-4">
+            <!-- Location Field -->
+            <div class="flex flex-col items-start w-full md:w-auto md:border-r border-[#E4E6E8] pr-4">
+              <label class="text-[#737373] text-sm mb-1" for="Location">Location</label>
+              <div class="flex items-center">
+                <img src="images/location.svg" alt="Location Icon" class="h-4 w-4 mr-2" />
+                <select name="Location" id="Location" class="text-base font-medium focus:outline-none">
+                  <option value="New York, USA">New York, USA</option>
+                </select>
+              </div>
+            </div>
+      
+            <!-- Check-In Field -->
+            <div class="flex flex-col items-start w-full md:w-auto md:border-r border-[#E4E6E8] pr-4">
+              <label class="text-[#737373] text-sm mb-1" for="checkIn">Check In</label>
+              <div class="flex items-center">
+                <img src="images/calendar.svg" alt="Calendar Icon" class="h-4 w-4 mr-2" />
+                <select name="checkIn" id="checkIn" class="text-base font-medium focus:outline-none">
+                  <option value="04 January 2024">04 January 2024</option>
+                </select>
+              </div>
+            </div>
+      
+            <!-- Check-Out Field -->
+            <div class="flex flex-col items-start w-full md:w-auto md:border-r border-[#E4E6E8] pr-4">
+              <label class="text-[#737373] text-sm mb-1" for="checkOut">Check Out</label>
+              <div class="flex items-center">
+                <img src="images/calendar.svg" alt="Calendar Icon" class="h-4 w-4 mr-2" />
+                <select name="checkOut" id="checkOut" class="text-base font-medium focus:outline-none">
+                  <option value="04 January 2024">04 January 2024</option>
+                </select>
+              </div>
+            </div>
+      
+            <!-- Guest Selection -->
+            <div class="flex flex-col items-start w-full md:w-auto">
+              <label class="text-[#737373] text-sm mb-1" for="Guest">Guest</label>
+              <div class="flex items-center">
+                <img src="images/user.svg" alt="Guest Icon" class="h-4 w-4 mr-2" />
+                <select name="Guest" id="Guest" class="text-base font-medium focus:outline-none">
+                  <option value="2 adults, 2 children">2 adults, 2 children</option>
+                </select>
+              </div>
+            </div>
+      
+            <!-- Search Button -->
+            <button class="flex items-center justify-center gap-2 bg-black rounded-full text-white font-medium text-sm px-6 py-3 w-full md:w-auto mt-2 md:mt-0">
+              <img src="images/search.svg" alt="Search" class="h-4 w-4" />
+              <span>Search</span>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="bg-white flex justify-center items-center">
+        <div class="container mx-auto mt-10 mb-20 text-center">
+            <h2 class="text-black text-3xl font-bold font-calibri">Top Searched Destinations</h2>
+            <p class="text-gray-500 text-sm font-normal font-sans mb-5">Favorite destinations of professional tourists</p>
+    
+            <!-- Destination Container -->
+            <div class="destination-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-center">
+            </div>
+        </div>
+    </section>
+      <section class="bg-[#F2F4F6] w-full py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap items-center justify-between mb-6">
+                <div>
+                    <h1 class="text-[30px] font-bold text-[#000]">Our
+                        Featured Tours</h1>
+                    <p class="text-gray-500 text-[10px]">Favorite
+                        destinations based on customer reviews</p>
+                </div>
+
+                <!-- Filter Navbar -->
+                <ul class="flex flex-wrap gap-2">
+                    <li class="relative">
+                        <button
+                            class="filter-btn flex items-center bg-gray-300 text-[10px] px-2 py-2 rounded-full hover:bg-yellow-400 transition">
+                            Categories <span><img src="images/arrow.svg" alt="arrow" class="w-3 h-3"></span>
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-lg mt-2 z-50">
+                            <ul class="py-2">
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="all">All</li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="Best Seller">Best
+                                    Seller</li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="Popular">Popular
+                                </li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="Top Rated">Top
+                                    Rated</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="relative">
+                        <button
+                            class="filter-btn flex items-center bg-gray-300 text-[10px] px-2 py-2 rounded-full hover:bg-yellow-400 transition">
+                            Duration <span><img src="images/arrow.svg" alt="arrow" class="w-3 h-3"></span>
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-lg mt-2 z-50">
+                            <ul class="py-2">
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="all">All</li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="1-3 Days">1-3 Days
+                                </li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="4-7 Days">4-7 Days
+                                </li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="8+ Days">8+ Days
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="relative">
+                        <button
+                            class="filter-btn flex items-center bg-gray-300 text-[10px] px-2 py-2 rounded-full hover:bg-yellow-400 transition">
+                            Review/Rating <span><img src="images/arrow.svg" alt="arrow" class="w-3 h-3"></span>
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-lg mt-2 z-50">
+                            <ul class="py-2">
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="all">All</li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="4+ Stars">4+ Stars
+                                </li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="3+ Stars">3+ Stars
+                                </li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="2+ Stars">2+ Stars
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="relative">
+                        <button
+                            class="filter-btn flex items-center bg-gray-300 text-[10px] px-2 py-2 rounded-full hover:bg-yellow-400 transition">
+                            Price range <span><img src="images/arrow.svg" alt="arrow" class="w-3 h-3"></span>
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-lg mt-2 z-50">
+                            <ul class="py-2">
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="all">All</li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="$0 - $100">$0 -
+                                    $100</li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="$100 - $300">$100 -
+                                    $300</li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-filter="$300+">$300+</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Cards Container -->
+            <div id="cardsContainer"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center justify-center mx-auto">
+            </div>
+        </div>
+    </section>
+      <section id="payment"
+    class="relative bg-[url('images/Section.png')] bg-cover bg-center flex flex-wrap items-center md:mx-[50px] h-full justify-center mb-10 p-4">
+    
+    <div class="w-full flex justify-end">
+        <img src="images/Image (1).png" alt="image" class="w-72 h-24">
+    </div>
+
+    <!-- Video and Images Section -->
+    <div class="flex flex-wrap items-center gap-4 w-full lg:w-1/2 pl-8 justify-center">
+        <!-- Video Section -->
+        <div class="relative w-44 h-44" id="videoContainer">
+            <img id="thumbnail" src="images/payment.png" alt="payment"
+                class="w-full h-full max-w-full object-contain rounded-lg">
+            <span class="absolute inset-0 flex items-center justify-center">
+                <a href="#" onclick="playYouTubeVideo(event, 'IgAnj6r1O48')">
+                    <img src="images/Link.png" alt="YouTube Link" class="w-12 h-12">
+                </a>
+            </span>
+        </div>
+
+        <img src="images/payment2.png" alt="payment" class="w-44 h-44 rounded-lg lg:mt-16">
+        <img src="images/payment3.png" alt="payment" class="w-44 h-44 rounded-lg lg:-mt-16">
+        <img src="images/payment4.png" alt="payment" class="w-44 h-44 rounded-lg lg:mt-0">
+    </div>
+
+    <!-- Text Section -->
+    <div class="text-left p-4 w-full lg:w-1/2 items-start justify-start mt-10 lg:mt-20 mb-14">
+        <h4 class="bg-gray-200 rounded-full text-black font-semibold text-[8px] inline-block px-4 py-2">Easy payment</h4>
+        <h1 class="mt-2 sm:text-[28px] small:text-[20px] font-bold w-full sm:w-[90%]">We offer tours in a range of locations</h1>
+        <p class="mt-2 text-black font-sans sm:w-[90%] sm:text-[14px] small:text-[10px]">Choose one style or create a package, fill your passports with adventures together</p>
+
+        <div class="mt-3 flex flex-wrap justify-start gap-2 font-sans">
+            <p class="flex items-center mt-2 mr-8 sm:text-[16px] small:text-[10px]">
+                <span><img src="images/check.svg" alt="check" class="w-4 h-4 mr-1"></span>Security Assurance
+            </p>
+            <p class="flex items-center mt-2 sm:text-[16px] small:text-[10px]">
+                <span><img src="images/check.svg" alt="check" class="w-4 h-4 mr-1"></span>Customer Support
+            </p>
+            <p class="flex items-center mt-2 mr-8 sm:text-[16px] small:text-[10px]">
+                <span><img src="images/check.svg" alt="check" class="w-4 h-4 mr-1"></span>Transparent Policies
+            </p>
+            <p class="flex items-center mt-2 sm:text-[16px] small:text-[10px]">
+                <span><img src="images/check.svg" alt="check" class="w-4 h-4 mr-1"></span>Reputable Affiliations
+            </p>
+        </div>
+
+        <p class="mt-4 text-black font-semibold">Payment is secure and safe</p>
+        <div class="mt-4 flex gap-4 justify-start">
+            <div class="p-2 border border-gray-200 rounded-lg">
+                <img src="images/paypal.png" alt="paypal" class="w-8 h-8">
+            </div>
+            <div class="p-2 border border-gray-200 rounded-lg">
+                <img src="images/stripe.png" alt="stripe" class="w-8 h-8">
+            </div>
+            <div class="p-2 border border-gray-200 rounded-lg">
+                <img src="images/mastercard.jpg" alt="mastercard" class="w-8 h-8">
+            </div>
+            <div class="p-2 border border-gray-200 rounded-lg">
+                <img src="images/skrill.png" alt="skrill" class="w-8 h-8">
+            </div>
+        </div>
+    </div>
+</section>
+    <section id="categories" class="container w-full max-w-6xl mx-auto md:mx-[50px] px-4 mb-10">
+        <div class="flex flex-col md:flex-row items-center justify-between mb-4">
+            <div class="text-left mb-4 md:mb-0">
+                <h1 class="text-2xl md:text-3xl font-bold md:ml-10">Top
+                    Categories of Tours</h1>
+                <p class="text-gray-700 text-sm md:text-base mt-2 md:ml-10">Favorite
+                    destinations based on customer
+                    reviews</p>
+            </div>
+            <button id="toggleBtn"
+                class="bg-black text-white p-3 rounded-full flex items-center justify-center gap-2 text-sm md:text-base">
+                <span id="toggleText">View More</span>
+                <span>
+                    <img src="images/arrownext.svg" alt="arrownext" class="w-4 h-4 filter invert brightness-0">
+                </span>
+            </button>
+        </div>
+        <div>
+            <div id="tourGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Tour Items -->
+            </div>
+        </div>
+    </section>
+    <section class="bg-[#9DD3FB] container mx-auto flex flex-col lg:flex-row items-center">
+
+        <div class="p-6 sm:p-10 flex flex-col justify-center items-center rounded-lg lg:w-1/2 lg:items-start ">
+            <p class="font-bold text-[14px] bg-[#FEFA17] rounded-3xl p-2 sm:p-3 inline-block text-center">
+                Install APP & Get discount code
+            </p>
+            <p class="font-bold text-[20px] sm:text-[24px] mt-4 max-w-[270px]">
+                Up to 55% Discount and lots of special gifts
+            </p>
+    
+            <div class="flex flex-col sm:flex-row gap-4 mt-4">
+                <div class="bg-black text-white rounded-lg flex items-center p-2 w-[180px]">
+                    <img src="images/playstore.png" class="w-8 h-8" alt="Google Play">
+                    <div class="ml-2">
+                        <p class="text-xs font-sans">GET IT ON</p>
+                        <p class="text-lg font-semibold font-sans">Google Play</p>
+                    </div>
+                </div>
+                <div class="bg-black text-white rounded-lg flex items-center p-2 w-[180px]">
+                    <img src="images/apple-logo.png" class="w-8 h-8" alt="App Store">
+                    <div class="ml-2">
+                        <p class="text-xs font-sans">Download on the</p>
+                        <p class="text-lg font-semibold font-sans">App Store</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="w-full lg:w-1/2 flex justify-end items-center mt-8 lg:mt-0">
+            <img src="images/payment4.png"
+                class="w-full h-auto sm:w-full md:w-full lg:max-w-[670px] md:max-h-[600px] object-cover rounded-lg lg:block hidden"
+                alt="Payment Methods">
+        </div>
+    
+    </section>
+      <section id="security" class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row flex-wrap justify-between items-start mt-20 md:mt-40 sm:mb-20">
+      <div class="left-column w-full md:w-[45%] flex flex-col items-start justify-center md:ml-25">
+          <div class="bg-[#FEFA17] rounded-full h-10 flex items-center justify-center gap-2 px-4 shadow-lg">
+              <img src="images/earth.svg" alt="earth" class="w-5 h-5">
+              <span class="font-semibold text-black text-[14px]">Why
+                  book at Travila?</span>
+          </div>
+          <h1 class="heading font-bold text-[24px] sm:text-[36px] mt-8 text-left max-w-full md:max-w-[90%]">Embracing
+              Adventure Since 2003</h1>
+
+          <p class="description font-normal text-[14px] mt-4 text-left max-w-full md:max-w-[80%]">Choose
+              one style or
+              create a package, fill your passports with adventures
+              together.</p>
+          <div class="stats mt-6 flex flex-col sm:flex-row justify-start gap-4 sm:gap-6 text-left">
+              <p class="flex flex-col text-[24px] sm:text-[30px] font-bold">
+                  45+<span class="text-gray-500 font-semibold text-[12px] max-w-20">
+                      Global Branches</span>
+              </p>
+              <p class="flex flex-col text-[24px] sm:text-[30px] font-bold">
+                  29K<span class="text-gray-500 font-semibold text-[12px] max-w-20">
+                      Destinations Collaboration</span>
+              </p>
+              <p class="flex flex-col text-[24px] sm:text-[30px] font-bold">
+                  20+<span class="text-gray-500 font-semibold text-[12px] max-w-20">
+                      Years Experience</span>
+              </p>
+              <p class="flex flex-col text-[24px] sm:text-[30px] font-bold">
+                  168K<span class="text-gray-500 font-semibold text-[12px] max-w-20">
+                      Happy Customers</span>
+              </p>
+          </div>
+      </div>
+      <div class="right-column w-full md:w-[40%] grid grid-cols-2 gap-4 mt-8 md:mt-0">
+          <div
+              class="card bg-[#FFF0EC] rounded-lg p-4 w-full  flex flex-col items-center border border-gray-200 relative md:-top-5">
+              <img src="images/experience.png.png" alt="Experience" class="w-8 h-8 bg-white rounded-full">
+              <h5 class="font-semibold mt-2 text-center">300,000+
+                  Experiences</h5>
+              <p class="font-normal text-[12px] mt-2 text-center max-w-32">Make
+                  memories around the world.</p>
+          </div>
+          <div
+              class="card bg-[#E4F9F9] rounded-lg p-4 w-full  flex flex-col items-center border border-gray-200 relative md:top-5">
+              <img src="images/SVG.png" alt="SVG" class="w-8 h-8 bg-white rounded-full">
+              <h5 class="font-semibold mt-2 text-center">Trusted
+                  Reviews</h5>
+              <p class="font-normal text-[12px] mt-2 text-center max-w-32">4.8
+                  stars from 160,000+ Trustpilot reviews
+              </p>
+          </div>
+          <div
+              class="card bg-[#E3F0FF] rounded-lg p-4 w-full  flex flex-col items-center border border-gray-200 relative md:-top-5">
+              <img src="images/SVG (1).png" alt="SVG" class="w-8 h-8 bg-white rounded-full">
+              <h5 class="font-semibold mt-2 text-center">Reserve now,
+                  Pay later</h5>
+              <p class="font-normal text-[12px] mt-2 text-center max-w-32">Book
+                  your spot first, pay later</p>
+          </div>
+          <div
+              class="card bg-[#EFEFEB] rounded-lg p-4 w-full  flex flex-col items-center border border-gray-200 relative md:top-5">
+              <img src="images/Clip path group.png" alt="Clip path group" class="w-8 h-8 bg-white rounded-full">
+              <h5 class="font-semibold mt-2 text-center">Security
+                  Assurance</h5>
+              <p class="font-normal text-[12px] mt-2 text-center max-w-32">Data
+                  security through encryption</p>
+          </div>
+      </div>
+
+  </section>
+      <section id="trends" class="md:mx-43 md:my-20">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center">Trending
+                Destinations</h2>
+            <p class="text-gray-600 text-center mb-6">Most popular
+                choices for travelers</p>
+
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-6" id="destination-container">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </section>
+      <section id="support">
+        <div
+            class="bg-[url('images/Section1.png')] bg-cover bg-center h-auto px-4 md:px-[150px] flex items-center justify-center mx-auto">
+            <div class="flex flex-col lg:flex-row justify-between p-4 md:p-8 gap-6 w-full">
+                <div class="flex flex-col justify-center gap-6 w-full lg:w-1/3">
+                    <div class="flex items-start gap-3">
+                        <img src="images/security.svg" alt="security"
+                            class="w-9 h-9 rounded-lg shadow-lg shadow-gray-500 p-1">
+                        <div class="ml-2">
+                            <h1 class="text-lg md:text-xl font-semibold text-start">Security
+                                Assurance</h1>
+                            <p class="text-sm text-gray-700 text-start mt-1">Demonstrates
+                                commitment to user data security through
+                                encryption and secure payment
+                                practices.</p>
+                            <p class="text-black mt-2 cursor-pointer text-start">
+                                Learn More
+                                <span><img src="images/arrownext.svg" alt="arrownext" class="w-3 h-3 inline"></span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <img src="images/support.svg" alt="support"
+                            class="w-9 h-9 rounded-lg shadow-lg shadow-gray-500 p-1">
+                        <div class="ml-2">
+                            <h1 class="text-lg md:text-xl font-semibold text-start">Customer
+                                Support</h1>
+                            <p class="text-sm text-gray-700 text-start mt-1">Commitment
+                                to providing exceptional support for all
+                                users through various channels.</p>
+                            <p class="text-black mt-2 cursor-pointer text-start">
+                                Learn More
+                                <span><img src="images/arrownext.svg" alt="arrownext" class="w-3 h-3 inline"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center w-full lg:w-1/3 my-6 lg:my-0">
+                    <img src="images/man.png.png" alt="man" class="w-[120px] sm:w-[150px] md:w-[200px] h-auto">
+                </div>
+                <div class="flex flex-col justify-center gap-6 w-full lg:w-1/3">
+                    <div class="flex items-start gap-3">
+                        <img src="images/policy.svg" alt="policy"
+                            class="w-9 h-9 rounded-lg shadow-lg shadow-gray-500 p-1">
+                        <div class="ml-2">
+                            <h1 class="text-lg md:text-xl font-semibold text-start">Transparent
+                                Policies</h1>
+                            <p class="text-sm text-gray-700 text-start mt-1">Demonstrates
+                                commitment to clear and open
+                                communication of data security
+                                policies.</p>
+                            <p class="text-black mt-2 cursor-pointer text-start">
+                                Learn More
+                                <span><img src="images/arrownext.svg" alt="arrownext" class="w-3 h-3 inline"></span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <img src="images/repu.svg" alt="repu" class="w-9 h-9 rounded-lg shadow-lg shadow-gray-500 p-1">
+                        <div class="ml-2">
+                            <h1 class="text-lg md:text-xl font-semibold text-start">Reputable
+                                Affiliations</h1>
+                            <p class="text-sm text-gray-700 text-start mt-1">Demonstrates
+                                commitment to high standards through
+                                recognized affiliations and
+                                certifications.</p>
+                            <p class="text-black mt-2 cursor-pointer text-start">
+                                Learn More
+                                <span><img src="images/arrownext.svg" alt="arrownext" class="w-3 h-3 inline"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+      <section id="ads" class="flex justify-center items-center p-4">
+        <img src="images/banner-ads.png" alt="ads" class="lg:w-[80%] p-4">
+    </section>
+    <section id="inspiration" class="bg-[#FCFCF3] py-4">
+        <div class="container mx-auto px-4 md:px-10 mt-10">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-4">
+                <div class="text-start">
+                    <h1 class="text-2xl md:text-3xl font-bold">Get inspiration for your next trip</h1>
+                    <p class="text-sm md:text-base text-gray-600">Favorite destinations based on customer reviews</p>
+                </div>
+                <div class="flex space-x-2 mt-4 md:mt-0">
+                    <button id="prevBtn" class="bg-gray-100 rounded-full p-2">
+                        <img src="images/previous.svg" alt="previous" class="w-4 h-4">
+                    </button>
+                    <button id="nextBtn" class="bg-gray-100 rounded-full p-2">
+                        <img src="images/arrownext.svg" alt="next" class="w-4 h-4">
+                    </button>
+                </div>
+            </div>
+    
+            <div id="cards-container" class="flex overflow-x-auto gap-4 pb-6 pt-6 scrollbar-hide scroll-smooth"></div>
+    
+            <div class="flex justify-start mt-6">
+                <button id="viewMoreBtn" class="bg-black text-white p-3 rounded-full flex items-center gap-2 text-sm">
+                    View More
+                    <img src="images/arrownext.svg" alt="arrow" class="w-4 h-4 filter invert">
+                </button>
+            </div>
+        </div>
+    </section>    
+      <footer class="bg-black text-white pt-12 px-4 font-sans">
+        <div class="md:mx-[150px] items-center">
+            <div>
+                <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="w-full">
+                        <div class="flex items-center space-x-2">
+                            <img src="images/logofooter.svg" alt="logo" />
+                        </div>
+                        <p class="mt-3 text-white text-[14px] max-w-[200px] md:max-w-[300px]">
+                            Dive into local recommendations for a truly
+                            authentic experience.
+                        </p>
+                        <ul class="mt-4 space-y-2 text-gray-500 text-[14px]">
+                            <li class="flex items-center space-x-2">
+                                <img src="images/address.svg" alt="address" class="pb-5" />
+                                <span>4517 Washington Ave, Manchester,
+                                    Kentucky 39495</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <img src="images/clock.svg" alt="clock" class="filter opacity-40" />
+                                <span>Hours: 8:00 - 17:00, Mon -
+                                    Sat</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <img src="images/email.svg" alt="email" class="filter opacity-40" />
+                                <span>support@travila.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md:ml-10">
+                        <h3 class="text-[16px] font-medium">Company</h3>
+                        <ul class="mt-4 space-y-2 text-gray-400 text-[14px]">
+                            <li>About Us</li>
+                            <li>Community Blog</li>
+                            <li>Jobs & Careers</li>
+                            <li>Contact Us</li>
+                            <li>Our Awards</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-[16px] font-medium">Services</h3>
+                        <ul class="mt-4 space-y-2 text-gray-400 text-[14px]">
+                            <li>Tour Guide</li>
+                            <li>Tour Booking</li>
+                            <li>Hotel Booking</li>
+                            <li>Ticket Booking</li>
+                            <li>Rental Services</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-[16px] font-normal">Newsletter</h3>
+                        <div class="mt-4 flex flex-col space-y-3">
+                            <div class="relative w-full">
+                                <img src="images/email.svg" alt="Mail Icon"
+                                    class="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3" />
+                                <input type="email" placeholder="Enter your email"
+                                    class="w-full pl-10 pr-4 py-2 rounded-4xl bg-none border border-gray-600 focus:ring-2 focus:ring-yellow-400 text-white" />
+                            </div>
+
+                            <button class="w-full bg-[#FEFA17] text-black py-2 rounded-4xl font-semibold">
+                                Subscribe
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 pt-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+                    <div class="border border-[#313131] p-4 rounded-l-lg flex items-center justify-center space-x-2">
+                        <img src="images/help.svg" alt />
+                        <div class="flex flex-col">
+                            <span class="text-xs font-light">Need help?
+                                Call us</span>
+                            <strong class="text-xl">1-800-222-8888</strong>
+                        </div>
+                    </div>
+                    <div class="border border-[#313131] p-4 flex items-center justify-center space-x-2">
+                        <img src="images/join.svg" alt />
+                        <span class="text-lg">Join Travila Affiliate
+                            <br />Program Today!</span>
+                    </div>
+                    <div class="border border-[#313131] p-4 rounded-r-lg flex items-start justify-center space-x-2">
+                        <img src="images/msg.svg" alt />
+                        <div>
+                            <span class="text-lg font-bold">Send us a
+                                message</span>
+                            <p class="text-xs font-normal">
+                                Contact our agents about your
+                                booking,<br />
+                                and we'll reply as soon as possible.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center flex-col md:flex-row mt-10">
+                    <div class="text-center text-sm">
+                        © 2024 Travila Inc. All rights reserved.
+                    </div>
+
+                    <div class="mt-4 flex justify-center space-x-4 items-center">
+                        <p>Follow us</p>
+                        <div class="flex justify-center items-center border rounded-full border-[#575756] h-9 w-9">
+                            <img src="images/insta.svg" alt class="h-4 w-4" />
+                        </div>
+                        <div class="flex justify-center items-center border rounded-full border-[#575756] h-9 w-9">
+                            <img src="images/facebook.svg" alt class="h-4 w-4" />
+                        </div>
+                        <div class="flex justify-center items-center border rounded-full border-[#575756] h-9 w-9">
+                            <img src="images/twitter.svg" alt class="h-4 w-4" />
+                        </div>
+                        <div class="flex justify-center items-center border rounded-full border-[#575756] h-9 w-9">
+                            <img src="images/youtube.svg" alt class="h-4 w-4" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+
+    [
+        { "id": 1, "image": "images/journey3.png", "title": "California Sunset Cruise", "rating": 4.96, "reviews": 672, "duration": "2 days 3 nights", "guests": "4-6 guests", "price": "$48.25", "tag": "Top Rated", "liked": false },
+        { "id": 2, "image": "images/journey2.png", "title": "Grand Canyon Helicopter Tour", "rating": 4.89, "reviews": 520, "duration": "3 days 2 nights", "guests": "2-5 guests", "price": "$129.99", "tag": "Best Seller", "liked": false },
+        { "id": 3, "image": "images/journey3.png", "title": "Bali Jungle Adventure", "rating": 4.75, "reviews": 410, "duration": "5 days 4 nights", "guests": "6-10 guests", "price": "$299.50", "tag": "Popular", "liked": false },
+        { "id": 4, "image": "images/journey2.png", "title": "Grand Canyon Helicopter Tour", "rating": 4.89, "reviews": 520, "duration": "3 days 2 nights", "guests": "2-5 guests", "price": "$129.99", "tag": "Best Seller", "liked": false },
+        { "id": 5, "image": "images/journey3.png", "title": "Bali Jungle Adventure", "rating": 4.75, "reviews": 410, "duration": "5 days 4 nights", "guests": "6-10 guests", "price": "$299.50", "tag": "Popular", "liked": false },
+        { "id": 6, "image": "images/journey2.png", "title": "Grand Canyon Helicopter Tour", "rating": 4.89, "reviews": 520, "duration": "3 days 2 nights", "guests": "2-5 guests", "price": "$129.99", "tag": "Best Seller", "liked": false },
+        { "id": 7, "image": "images/journey3.png", "title": "Bali Jungle Adventure", "rating": 4.75, "reviews": 410, "duration": "5 days 4 nights", "guests": "6-10 guests", "price": "$299.50", "tag": "Popular", "liked": false },
+        { "id": 8, "image": "images/journey3.png", "title": "California Sunset Cruise", "rating": 4.96, "reviews": 672, "duration": "2 days 3 nights", "guests": "4-6 guests", "price": "$48.25", "tag": "Top Rated", "liked": false },
+        { "id": 9, "image": "images/journey2.png", "title": "Grand Canyon Helicopter Tour", "rating": 4.89, "reviews": 520, "duration": "3 days 2 nights", "guests": "2-5 guests", "price": "$129.99", "tag": "Best Seller", "liked": false },
+        { "id": 10, "image": "images/journey3.png", "title": "Bali Jungle Adventure", "rating": 4.75, "reviews": 410, "duration": "5 days 4 nights", "guests": "6-10 guests", "price": "$299.50", "tag": "Popular", "liked": false }
+    ]
+

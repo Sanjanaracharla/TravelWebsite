@@ -1,0 +1,10 @@
+[
+  { "name": "Venice", "image": "images/destination.png", "tours": 356, "url": "https://www.venice.com" },
+  { "name": "Amsterdam", "image": "images/destination2.png", "tours": 356, "url": "https://www.amsterdam.com" },
+  { "name": "Budapest", "image": "images/destination3.png", "tours": 356, "url": "https://www.budapest.com" },
+  { "name": "Lisbon", "image": "images/destination4.png", "tours": 356, "url": "https://www.lisbon.com" },
+  { "name": "London", "image": "images/destination.png", "tours": 356, "url": "https://www.london.com" },
+  { "name": "Ottawa", "image": "images/destination2.png", "tours": 356, "url": "https://www.ottawa.com" },
+  { "name": "Paris", "image": "images/destination3.png", "tours": 356, "url": "https://www.paris.com" },
+  { "name": "London", "image": "images/destination.png", "tours": 356, "url": "https://www.london.com" }
+]
